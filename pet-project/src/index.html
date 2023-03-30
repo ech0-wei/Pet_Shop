@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Pete's Pet Shop</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Pete's Pet Shop</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+      <!-- <li><a href="#">Donate</a></li> -->
+      <!-- <li><a href="#">Add Pet</a></li> -->
+    </ul>
+    <button class="btn navbar-btn btn-addPet" 
+      style="background-color: #e3f2fd;" 
+      onclick="toggleForm()">Add Pet</button>
+  </div>
+</nav>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-sm-push-2">
+        <div style="display:inline-block; margin:0 150px">
+            <h1 class="text-center" >Pete's Pet Shop</h1>
+          </div>
+          </div>
+    </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+            <div class="col-md-3 col-sm-3 col-xs-3">&nbsp;</div>
+             <div style="display:inline-block; margin-right:20px "> 
+              <label>Donate Eth</label>
+              <input type="text" name="mouse" value="" id="amount">
+              <!-- <span style="position: absolute; top: 0; right: 0; display: table-cell; white-space: nowrap; padding: 7px 10px;">Eth</span>  -->
+              <button id="donate">Donate</button>
+              <button id="withdraw">Withdraw</button>
+            </div>
+             <!-- <div style="display:inline-block "> </div> -->
+        <hr />
+        <br />
+      <!-- </div> -->
+
+
+    <!-- </div> -->
+      <!-- add pet button -->
+      <!-- <div class="form-group" >
+        <button class="btn btn-primary mt-3 btn-addPet" onclick="toggleForm()">Add Pet</button>
+      </div> -->
+    <!-- add pet form -->
+
+      <form id="addPetsForm" class="addform" style="display: none;">
+        <h2>Add New Pet</h2>
+        <div class="form-group">
+          <label for="name">Pet Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Pet Name">
+        </div>
+        <div class="form-group">
+          <label for="breed">breed</label>
+          <input type="text" class="form-control" id="breed" placeholder="breed">
+        </div>
+        <div class="form-group">
+          <label for="breed">age</label>
+          <input type="number" class="form-control" id="age" placeholder="age">
+        </div>
+        <div class="form-group">
+          <label for="location">location</label>
+          <input type="text" class="form-control" id="location" placeholder="location">
+        </div>
+        <div class="form-group">
+          <label for="photo">photo URL</label>
+          <input type="url" class="form-control" id="photo" placeholder="photo url" onchange="preview()">
+          <img id="frame" src="" class="img-fluid" />
+        </div>
+        <button type="button" class="btn btn-primary btn-lg btn-block btn-upload" id="upload">upload</button>
+        <div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+      </form>
+      
+
+
+    <div id="counterRow" class="row">
+      <div class="col-sm-4">
+        <label>Most adopted breed: </label>
+        <p id="most_adopted">0</p>
+      </div>
+      <div class="col-sm-4">
+        <label>Most popular petId: </label>
+        <p id="most_popular">0</p>
+      </div>
+      <div class="col-sm-4">
+        <label>Total customers served: </label>
+        <p id="total_customer_served">0</p>
+      </div>
+      <div class="col-sm-4">
+        <label>Total pets adopted: </label>
+        <p id="total_pets_adpoted">0</p>
+      </div>
+    </div>
+    <hr />
+    <br />
+    <!--      <FilterBar-->
+    <!--            genders={generateGenderDataForDropdown()}-->
+    <!--            onNameFilter={handleFilterName}-->
+    <!--            onEmailFilter={handleFilterEmail}-->
+    <!--            onGenderFilter={handleFilterGender}-->
+    <!--            onDateFilter={handleFilterDate}-->
+    <!--          />-->
+    <div id="filterRow" class="row">
+      <form method="get" action id="filter-form">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-3 col-md-3">
+              <label for="breed">Breed</label>
+              <div class="select">
+                <select class="form-control" id="select-breed" name="breed">
+                  <option value="any">Any</option>
+                  <!--                    <option  value="akita-inu">Akita Inu (2)</option>-->
+                  <!--                      <option  value="american-bulldog">American Bulldog (1)</option>-->
+                  <!--                      <option  value="american-foxhound">American Foxhound (1)</option>-->
+                  <!--                      <option  value="american-staffordshire-terrier">American Staffordshire Terrier (1)</option>-->
+                  <!--                      <option  value="anatolian-shepherd">Anatolian Shepherd (3)</option>-->
+                  <!--                      <option  value="belgian-malinois">Belgian - Malinois (2)</option>-->
+                  <!--                      <option  value="boxer">Boxer (2)</option>-->
+                  <!--                      <option  value="bullmastiff">Bullmastiff (1)</option>-->
+                  <!--                      <option  value="cane-corso">Cane Corso (1)</option>-->
+                  <!--                      <option  value="caucasian-shepherd">Caucasian Shepherd (1)</option>-->
+                  <!--                      <option  value="german-shepherd">German Shepherd (8)</option>-->
+                  <!--                      <option  value="husky">Husky (2)</option>-->
+                  <!--                      <option  value="kangal-dog">Kangal Dog (1)</option>-->
+                  <!--                      <option  value="labrador-retriever">Labrador Retriever (3)</option>-->
+                  <!--                      <option  value="mastiff">Mastiff (2)</option>-->
+                  <!--                      <option  value="olde-english-bulldogge">Olde English Bulldogge (1)</option><option  value="peruvian-hairless">Peruvian Hairless (1)</option><option  value="pit-bull-terrier">Pit Bull Terrier (5)</option><option  value="rottweiler">Rottweiler (2)</option><option  value="shar-pei">Shar-Pei (1)</option><option  value="siberian-husky">Siberian Husky (2)</option>-->
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-3 col-md-3">
+              <label for="age">Approximate Age</label>
+              <div class="select">
+                <select class="form-control" id="select-age" name="age">
+                  <option value="any">Any</option>
+                </select>
+              </div>
+            </div>
+            <!--              <div class="col-xs-6 col-md-3">-->
+            <!--				<label for="gender">Sex</label>-->
+            <!--				<div class="select">-->
+            <!--					<select class="form-control" id="select-gender" name="gender">-->
+            <!--						<option value="any">Any</option>						<option value="male" >Male</option>-->
+            <!--						<option value="female" >Female</option>-->
+            <!--					</select>-->
+            <!--				</div>-->
+            <!--			</div>-->
+            <div class="col-xs-3 col-md-3">
+              <label for="location">Location</label>
+              <div class="select">
+                <select class="form-control" id="select-location" name="location">
+                  <option value="any">Any</option>
+                  <!--                      <option  value="100 Mile House & District Branch">100 Mile House & District Branch</option><option  value="Abbotsford Branch">Abbotsford Branch</option><option  value="Alberni-Clayoquot Branch">Alberni-Clayoquot Branch</option><option  value="Burnaby Branch">Burnaby Branch</option><option  value="Campbell River Branch">Campbell River Branch</option><option  value="Chilliwack Branch">Chilliwack Branch</option><option  value="Comox Valley & District Branch">Comox Valley & District Branch</option><option  value="Cowichan & District Branch">Cowichan & District Branch</option><option  value="Special Rescue Provincial">Special Rescue Provincial</option><option  value="East Kootenay Branch">East Kootenay Branch</option><option  value="Haida Gwaii Branch">Haida Gwaii Branch</option><option  value="Kamloops & District Branch">Kamloops & District Branch</option><option  value="Kelowna Branch">Kelowna Branch</option><option  value="Maple Ridge Branch">Maple Ridge Branch</option><option  value="Nanaimo & District Branch">Nanaimo & District Branch</option><option  value="Nelson Branch">Nelson Branch</option><option  value="North Cariboo District Branch">North Cariboo District Branch</option><option  value="North Peace Branch">North Peace Branch</option><option  value="Parksville-Qualicum Beach & District Branch">Parksville-Qualicum Beach & District Branch</option><option  value="Powell River & District Branch">Powell River & District Branch</option><option  value="Prince Rupert Branch">Prince Rupert Branch</option><option  value="Quesnel & District Branch">Quesnel & District Branch</option><option  value="Richmond Education & Adoption Centre">Richmond Education & Adoption Centre</option><option  value="Salt Spring Island Branch">Salt Spring Island Branch</option><option  value="Sea To Sky Branch">Sea To Sky Branch</option><option  value="Shuswap Branch">Shuswap Branch</option><option  value="South Okanagan/Similkameen Branch">South Okanagan/Similkameen Branch</option><option  value="South Peace Branch">South Peace Branch</option><option  value="Sunshine Coast Branch">Sunshine Coast Branch</option><option  value="Surrey Education & Adoption Centre">Surrey Education & Adoption Centre</option><option  value="Tri-Cities Education & Adoption Centre">Tri-Cities Education & Adoption Centre</option><option  value="Vancouver Branch">Vancouver Branch</option><option  value="Vernon & District Branch">Vernon & District Branch</option><option  value="Victoria Branch">Victoria Branch</option><option  value="West Kootenay & District Branch">West Kootenay & District Branch</option><option  value="West Vancouver Branch">West Vancouver Branch</option><option  value="Williams Lake & District Branch">Williams Lake & District Branch</option>					</select>-->
+                </select>
+              </div>
+            </div>
+          <!-- </div> -->
+          <!-- <div class="row action-buttons"> -->
+            <div class="col-xs-3 col-md-3">
+              <label for="location"> </label><div class="select">
+              <button type="submit" id="apply-filter" name="filter" value="search" class="btn btn-default">Apply Filters</button>
+              </div>
+              <!--                  <a href="#" class="reset-filters small">Reset Filters</a> &nbsp; &nbsp;-->
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+    <div id="petsRow" class="row">
+      <!-- PETS LOAD HERE -->
+    </div>
+  </div>
+
+  <div id="petTemplate" style="display: none;">
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="panel panel-default panel-pet">
+        <div class="panel-heading">
+          <h3 class="panel-title">Scrappy</h3>
+        </div>
+        <div class="panel-body">
+          <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" style="width: 100%;"
+            src="https://animalso.com/wp-content/uploads/2017/01/Golden-Retriever_6.jpg" data-holder-rendered="true">
+          <br /><br />
+          <strong>Breed</strong>: <span class="pet-breed">Golden Retriever</span><br />
+          <strong>Age</strong>: <span class="pet-age">3</span><br />
+          <strong>Location</strong>: <span class="pet-location">Warren, MI</span><br /><br />
+          <button class="btn btn-default btn-adopt" type="button" data-id="0">Adopt</button>
+          <button class="btn btn-default btn-vote" type="button" data-id="0">Vote</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function preview() {
+      console.log(event.target);
+              frame.src = event.target.value;//URL.createObjectURL(event.target.files[0]);
+    }
+
+    function clearImage() {
+              document.getElementById('formFile').value = null;
+              frame.src = "";
+    }
+  </script>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/web3.min.js"></script>
+  <script src="js/truffle-contract.js"></script>
+  <script src="js/app.js"></script>
+  <!-- <script type="module" src="js/FilterBar.js"></script> -->
+</body>
+
+</html>
